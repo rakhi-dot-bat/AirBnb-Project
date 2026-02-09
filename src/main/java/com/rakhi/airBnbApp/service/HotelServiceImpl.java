@@ -43,7 +43,7 @@ public class HotelServiceImpl implements HotelService{
         log.info("Updating hotel with id "+id);
         Hotel hotel = hotelRepository
                 .findById(id)
-                .orElseThrow(()-> new ResourceNotFoundException("Hotel not found with id "+id));
+                .orElseThrow(()-> new ResourceNotFoundException("Hotel does not exists with id "+id));
         modelMapper.map(hotelDto , hotel);
         hotel= hotelRepository.save(hotel);
         return modelMapper.map(hotel, HotelDto.class);
