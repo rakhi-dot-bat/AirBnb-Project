@@ -95,6 +95,7 @@ Swagger UI – View and test API docs: localhost:8080/api/v1/swagger-ui/index.ht
 ---
 
 Swagger UI Screenshots
+<img width="566" height="681" alt="image" src="https://github.com/user-attachments/assets/d5de8df8-1fff-4131-aa82-4e5ebf6d7382" />
 
 
 ---
