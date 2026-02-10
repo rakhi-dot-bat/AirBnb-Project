@@ -38,6 +38,7 @@ public class GlobalExceptionHandler {
                 .message(e.getMessage())
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .build();
+        log.error("INTERNAL_SERVER_ERROR occured",e);
         return new ResponseEntity<>(apiError,HttpStatus.INTERNAL_SERVER_ERROR);
     }
 

@@ -1,8 +1,6 @@
 package com.rakhi.airBnbApp.controller;
 
 import com.rakhi.airBnbApp.dto.HotelDto;
-import com.rakhi.airBnbApp.entity.Hotel;
-import com.rakhi.airBnbApp.exception.ResourceNotFoundException;
 import com.rakhi.airBnbApp.service.HotelService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -48,6 +46,13 @@ public class HotelController {
     {
         hotelService.deleteHotelById(hotelId);
         return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping("/{hotelId}")
+    public ResponseEntity<Void> activateHotel(@PathVariable Long hotelId)
+    {
+        hotelService.activateHotel(hotelId);
+        return  ResponseEntity.noContent().build();
     }
 
 
