@@ -86,7 +86,7 @@ com.airbnb.clone├── controller
 - Proper HTTP status codes
 ---
 
-🧰 Tools Used
+# 🧰 Tools Used
 
 Postman – API testing
 
@@ -94,12 +94,13 @@ Swagger UI – View and test API docs: localhost:8080/api/v1/swagger-ui/index.ht
 
 ---
 
-Swagger UI Screenshots
+# Swagger UI Screenshots
+
 <img width="566" height="681" alt="image" src="https://github.com/user-attachments/assets/d5de8df8-1fff-4131-aa82-4e5ebf6d7382" />
 
 
 ---
-📌 Future Enhancements
+# 📌 Future Enhancements
 
 Booking management
 
@@ -111,32 +112,19 @@ Payment gateway integration
 
 Caching with Redis
 
-Deployment using Docker & AWS
 ----
-📚 Learning Outcomes
+## 📚 Learning Outcomes
 
-By building this Airbnb Clone backend project, I gained hands-on experience with:
-
-Designing RESTful APIs using Spring Boot following industry best practices
-
-Implementing JWT-based authentication and authorization with Spring Security
-
-Applying role-based access control (RBAC) for ADMIN and USER roles
-
-Structuring a project using clean layered architecture (Controller, Service, Repository)
-
-Working with Spring Data JPA & Hibernate for database interactions
-
-Handling CRUD operations with proper HTTP methods (GET, POST, PUT, PATCH, DELETE)
-
-Implementing global exception handling using @ControllerAdvice
-
-Performing input validation using @Valid and custom validation annotations
-
-Integrating and configuring Swagger / OpenAPI for API documentation
-
-Debugging common backend issues such as 500 errors, validation failures, and security blocks
-
-Writing scalable and maintainable code suitable for real-world applications
-
-Understanding how production-ready backend systems are designed and extended
+- By building this Airbnb Clone backend project, I gained hands-on experience with:
+- Designing RESTful APIs using Spring Boot following industry best practices
+- Implementing JWT-based authentication and authorization with Spring Security
+- Applying role-based access control (RBAC) for ADMIN and USER roles
+- Structuring a project using clean layered architecture (Controller, Service, Repository)
+- Working with Spring Data JPA & Hibernate for database interactions
+- Handling CRUD operations with proper HTTP methods (GET, POST, PUT, PATCH, DELETE)
+- Implementing global exception handling using @ControllerAdvice
+- Performing input validation using @Valid and custom validation annotations
+- Integrating and configuring Swagger / OpenAPI for API documentation
+- Debugging common backend issues such as 500 errors, validation failures, and security blocks
+- Writing scalable and maintainable code suitable for real-world applications
+- Understanding how production-ready backend systems are designed and extended
