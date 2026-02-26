@@ -1,8 +1,7 @@
 package com.rakhi.airBnbApp.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -15,9 +14,12 @@ import java.util.Date;
 @Getter
 @Setter
 @Table(uniqueConstraints = @UniqueConstraint(
-        name= "unoque_hotel_room_date",
+        name= "unique_hotel_room_date",
         columnNames = {"hotel_Id", "room_Id", "date"}
 ))
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Inventory {
 
     @Id
@@ -34,6 +36,9 @@ public class Inventory {
 
     @Column(nullable = false)
     private LocalDate date;
+
+    @Column(nullable = false, columnDefinition = "INTEGER DEFAULT 0")
+    private Integer reservedCount;
 
     @Column(nullable = false , columnDefinition = "INTEGER DEFAULT 0")
     private Integer bookedCount;
