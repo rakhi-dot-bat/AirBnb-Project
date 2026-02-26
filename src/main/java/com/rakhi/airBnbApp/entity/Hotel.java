@@ -1,12 +1,16 @@
 package com.rakhi.airBnbApp.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PastOrPresent;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -41,5 +45,8 @@ public class Hotel {
 
     @Embedded
     private HotelContactInfo contactInfo;
+
+    @OneToMany(mappedBy = "hotel")
+    private List<Room> rooms;
 
 }

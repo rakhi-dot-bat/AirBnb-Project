@@ -2,8 +2,11 @@ package com.rakhi.airBnbApp.service;
 
 import com.rakhi.airBnbApp.dto.HotelDto;
 import com.rakhi.airBnbApp.entity.Hotel;
+import com.rakhi.airBnbApp.entity.Room;
 import com.rakhi.airBnbApp.exception.ResourceNotFoundException;
 import com.rakhi.airBnbApp.repository.HotelRepository;
+import com.rakhi.airBnbApp.repository.RoomRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -18,6 +21,8 @@ public class HotelServiceImpl implements HotelService{
 
     private final HotelRepository hotelRepository;
     private final ModelMapper modelMapper;
+    private final InventoryService inventoryService;
+    private final RoomRepository roomRepository;
 
     @Override
     public HotelDto createNewHotel(HotelDto hotelDto) {
@@ -43,7 +48,7 @@ public class HotelServiceImpl implements HotelService{
         log.info("Updating hotel with id "+id);
         Hotel hotel = hotelRepository
                 .findById(id)
-                .orElseThrow(()-> new ResourceNotFoundException("Hotel not found with id "+id));
+                .orElseThrow(()-> new ResourceNotFoundException("Hotel does not exists with id "+id));
         modelMapper.map(hotelDto , hotel);
         hotel= hotelRepository.save(hotel);
         return modelMapper.map(hotel, HotelDto.class);
@@ -51,12 +56,35 @@ public class HotelServiceImpl implements HotelService{
     }
 
     @Override
+    @Transactional
     public Boolean deleteHotelById(long id) {
         log.info("Deleting hotel with id : "+id);
-        boolean exists = hotelRepository.existsById(id);
-        if(!exists) throw  new ResourceNotFoundException("Hotel doesn't exists with id :"+id) ;
+        Hotel hotel = hotelRepository
+                .findById(id)
+                .orElseThrow(()-> new ResourceNotFoundException("Hotel does not exists with id "+id));
         hotelRepository.deleteById(id);
+        for(Room room: hotel.getRooms())
+        {
+            inventoryService.deleteAllInventories(room);
+            roomRepository.deleteById(room.getId());
+        }
+        hotelRepository.deleteById(id);
+
         return true;
-        //TODO : delete the future inventories for this hotel
+    }
+
+    @Override
+    @Transactional
+    public void activateHotel(Long id) {
+        log.info("activating the  hotel with id "+id);
+        Hotel hotel = hotelRepository
+                .findById(id)
+                .orElseThrow(()-> new ResourceNotFoundException("Hotel does not exists with id "+id));
+        hotel.setActive(true);
+
+        for(Room room: hotel.getRooms())
+        {
+            inventoryService.initializeRoomForAYear(room);
+        }
     }
 }

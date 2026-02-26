@@ -1,8 +1,8 @@
 package com.rakhi.airBnbApp.controller;
 
 import com.rakhi.airBnbApp.dto.HotelDto;
-import com.rakhi.airBnbApp.entity.Hotel;
 import com.rakhi.airBnbApp.service.HotelService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -19,9 +19,8 @@ public class HotelController {
     private final HotelService hotelService;
     private final ModelMapper modelMapper;
 
-
     @PostMapping("/")
-    public ResponseEntity<HotelDto> createNewHotel(@RequestBody HotelDto hotelDto)
+    public ResponseEntity<HotelDto> createNewHotel(@RequestBody @Valid HotelDto hotelDto)
     {
         log.info("attempting to create a new hotel with name" +hotelDto.getName());
         HotelDto hotel = hotelService.createNewHotel(hotelDto);
@@ -48,5 +47,14 @@ public class HotelController {
         hotelService.deleteHotelById(hotelId);
         return ResponseEntity.noContent().build();
     }
+
+    @PatchMapping("/{hotelId}")
+    public ResponseEntity<Void> activateHotel(@PathVariable Long hotelId)
+    {
+        hotelService.activateHotel(hotelId);
+        return  ResponseEntity.noContent().build();
+    }
+
+
 
 }
